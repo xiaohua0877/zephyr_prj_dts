@@ -168,15 +168,7 @@
 				};
 			};
 
-			gpioa: gpio@40020000 {
-				compatible = "st,stm32-gpio";
-				gpio-controller;
-				#gpio-cells = < 0x02 >;
-				reg = < 0x40020000 0x400 >;
-				clocks = < 0x02 0x00 0x01 >;
-				label = "GPIOA";
-				phandle = < 0x05 >;
-			};
+
 
 			gpiob: gpio@40020400 {
 				compatible = "st,stm32-gpio";
@@ -223,7 +215,16 @@
 				clocks = < 0x02 0x00 0x20 >;
 				label = "GPIOF";
 			};
-
+            
+			gpioa: gpio@40020000 {
+				compatible = "st,stm32-gpio";
+				gpio-controller;
+				#gpio-cells = < 0x02 >;
+				reg = < 0x40020000 0x400 >;
+				clocks = < 0x02 0x00 0x01 >;
+				label = "GPIOA";
+				phandle = < 0x05 >;
+			};
 			gpiog: gpio@40021800 {
 				compatible = "st,stm32-gpio";
 				gpio-controller;

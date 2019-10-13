@@ -13,9 +13,6 @@ import re
 import yaml
 import argparse
 from collections import defaultdict
-import logging
-from log import log_init
-import log
 from devicetree import parse_file
 from extract.globals import *
 import extract.globals
@@ -28,7 +25,6 @@ from extract.flash import flash
 from extract.pinctrl import pinctrl
 from extract.default import default
 
-logger = logging.getLogger('DTS')
 
 def extract_bus_name(node_path, def_label):
     label = def_label + '_BUS_NAME'
@@ -101,7 +97,7 @@ def generate_prop_defines(node_path, prop):
 def generate_node_defines(node_path):
     # Generates #defines (and .conf file values) from the device
     # tree node at 'node_path'
-    logger.debug("s node_defines: " + node_path)
+    logger.debug("node_defines: " + node_path)
     if get_compat(node_path) not in get_binding_compats():
         return
 
@@ -111,7 +107,7 @@ def generate_node_defines(node_path):
         flash.extract_partition(node_path)
         return
 
-    #print("bus node_defines: " + node_path)
+    logger.debug("bus node_defines: " + node_path)
     generate_bus_defines(node_path)
 
     # Generate per-property ('foo = <1 2 3>', etc.) #defines
@@ -443,7 +439,8 @@ def yaml_inc_error(msg):
 
 def generate_defines():
     # Generates #defines (and .conf file values) from DTS
-
+    
+    logger.info('run to generate_defines ')
     # sorted() otherwise Python < 3.6 randomizes the order of the flash
     # partition table
     for node_path in sorted(reduced.keys()):
@@ -454,6 +451,7 @@ def generate_defines():
 
     for k, v in regs_config.items():
         if k in chosen:
+            logger.debug("k "+ k )
             reg.extract(chosen[k], None, v, 1024)
 
     for k, v in name_config.items():

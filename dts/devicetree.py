@@ -9,9 +9,10 @@
 
 import sys
 import pprint
-import logging
+from extract.globals import *
 
-logger = logging.getLogger('DTS')
+
+
 
 def read_until(line, fd, end):
     out = [line]

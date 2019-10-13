@@ -48,6 +48,7 @@ class DTCompatible(DTDirective):
         # #define DT_<COMPAT>_<INSTANCE ID> 1
         for compat, instance_id in reduced[node_path]['instance_id'].items():
             compat_instance = 'DT_' + str_to_label(compat) + '_' + str(instance_id)
+            logger.debug("compat " +  compat_instance + " id " + str(instance_id))
 
             insert_defs(node_path, {compat_instance: '1'}, {})
 

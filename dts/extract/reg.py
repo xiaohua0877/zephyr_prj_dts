@@ -76,7 +76,10 @@ class DTReg(DTDirective):
 
             addr += translate_addr(addr, node_path,
                     nr_address_cells, nr_size_cells)
-
+            logger.info( l_base )
+            logger.info( l_addr )
+            logger.info(l_size)
+            logger.info(l_idx)
             l_addr_fqn = '_'.join(l_base + l_addr + l_idx)
             l_size_fqn = '_'.join(l_base + l_size + l_idx)
             if nr_address_cells:
@@ -108,11 +111,12 @@ class DTReg(DTDirective):
                             '_'.join([str_to_label(alias)] + l_size + l_idx),
                         l_size_fqn,
                         prop_alias)
-
+            logger.info(l_size_fqn)
             insert_defs(node_path, prop_def, prop_alias)
 
             # increment index for definition creation
             index += 1
+            logger.info("test code   "+str(index))
 
 ##
 # @brief Management information for registers.

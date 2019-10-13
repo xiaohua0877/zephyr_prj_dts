@@ -6,6 +6,7 @@
 #
 
 import sys
+import logging
 
 from collections import defaultdict
 
@@ -19,6 +20,7 @@ bindings = {}
 bus_bindings = {}
 binding_compats = []
 old_alias_names = False
+logger = logging.getLogger('DTS')
 
 regs_config = {
     'zephyr,sram'  : 'DT_SRAM',
@@ -489,3 +491,16 @@ def err(msg):
     # status 1.
 
     sys.exit("error: " + msg)
+
+def log_init():
+    # create logger
+    ##logger = logging.getLogger('simple_example')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(name)s:%(levelname)s:%(message)s')
+    logging.warning('this is warning')
+    logging.info('this is info')
+
+    logger.setLevel(logging.DEBUG)
+    logger.debug('debug message')
+    logger.info('info message')
+    logger.error('error message')
+    logger.critical('critical message22')
